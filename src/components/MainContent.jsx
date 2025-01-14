@@ -1,9 +1,10 @@
-import { useUser } from '../context/context';
+// import { useUser } from '../context/context';
+import { useSelector } from 'react-redux';
 import Profile from './Profile';
 import Signin from './Signin';
 
 const MainContent = () => {
-  const { signedIn } = useUser();
+  const signedIn = useSelector((state) => state.signedIn);
   return <div>{signedIn ? <Profile /> : <Signin />}</div>;
 };
 

@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { useUser } from '../context/context';
+// import { useUser } from '../context/context';
 import toast from 'react-hot-toast';
+import { setUserDetails } from '../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const Signin = () => {
   const [inputName, setInputName] = useState('');
   const [inputRole, setInputRole] = useState('');
   const [inputCountry, setInputCountry] = useState('');
-  const { setUserName, setSignedIn, setRole, setCountry, setImage } = useUser();
+  const [inputImage, setInputImage] = useState(null);
+  // const { setUserName, setSignedIn, setRole, setCountry, setImage } = useUser();
+
+  const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
     setInputName(e.target.value);
@@ -20,28 +25,29 @@ const Signin = () => {
     setInputCountry(e.target.value);
   };
 
-  const handleSignedIn = () => {
+  const handleSignedIn = (e) => {
+    e.preventDefault();
     if (inputName === '' || inputRole === '' || inputCountry === '')
       return toast.error('Enter all the fields');
-    setUserName(inputName);
-    setRole(inputRole);
-    setCountry(inputCountry);
-    setSignedIn(true);
-    toast.success('Successfully sign in!');
+    dispatch(
+      setUserDetails({
+        userName: inputName,
+        signedIn: true,
+        country: inputCountry,
+        role: inputRole,
+        image: inputImage,
+      })
+    );
+    toast.success('Successfully signed in!');
   };
 
   function onChange(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      const img = document.getElementById('uploadedImage');
-      img.src = event.target.result;
-      img.classList.remove('hidden');
-      document.getElementById('fileContent').classList.add('hidden');
-    };
-
-    reader.readAsDataURL(file);
-    setImage(event.target.files[0]);
+    const file = event.target.files[0];
+    const img = document.getElementById('uploadedImage');
+    img.src = URL.createObjectURL(file);
+    img.classList.remove('hidden');
+    document.getElementById('fileContent').classList.add('hidden');
+    setInputImage(file);
   }
 
   return (
