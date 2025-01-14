@@ -1,13 +1,7 @@
 import { Skeleton } from '@mui/material';
-// import { useUser } from '../context/context';
 import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  // const { userName } = useUser();
-  // const { role } = useUser();
-  // const { country } = useUser();
-  // const { image } = useUser();
-
   const { userName, role, country, image } = useSelector((state) => state);
   return (
     <div className="flex flex-col gap-4 items-center justify-center min-h-screen bg-gray-100 p-4">

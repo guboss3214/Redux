@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useUser } from '../context/context';
 import toast from 'react-hot-toast';
 import { setUserDetails } from '../redux/actions';
 import { useDispatch } from 'react-redux';
@@ -9,7 +8,6 @@ const Signin = () => {
   const [inputRole, setInputRole] = useState('');
   const [inputCountry, setInputCountry] = useState('');
   const [inputImage, setInputImage] = useState(null);
-  // const { setUserName, setSignedIn, setRole, setCountry, setImage } = useUser();
 
   const dispatch = useDispatch();
 
