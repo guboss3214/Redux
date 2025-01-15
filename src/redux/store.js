@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 const initialState = {
   userName: '',
@@ -20,6 +20,8 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: reducer,
+});
 
 export default store;
