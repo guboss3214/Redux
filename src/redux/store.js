@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   userName: '',
@@ -8,20 +8,23 @@ const initialState = {
   image: null,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_USER_DETAILS':
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setUserDetails: (state, action) => {
       return {
         ...state,
         ...action.payload,
       };
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
+
+export const { setUserDetails } = userSlice.actions;
 
 const store = configureStore({
-  reducer: reducer,
+  reducer: userSlice.reducer,
 });
 
 export default store;

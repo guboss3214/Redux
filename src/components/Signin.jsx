@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { setUserDetails } from '../redux/actions';
+import { setUserDetails } from '../redux/store';
 import { useDispatch } from 'react-redux';
 
 const Signin = () => {
